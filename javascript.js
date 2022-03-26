@@ -1,3 +1,30 @@
+function game() {
+    console.clear();
+    let compWins = 0;
+    let playerWins = 0;
+
+    for(let i=0; i<5; i++){
+        let compChoice = computerPlay();
+        let playerChoice = getPlayerChoice();
+
+        console.log("You chose: " + playerChoice);
+        console.log("Computer chose: " + compChoice);
+
+        let winner = playRound(compChoice, playerChoice);
+        if (winner != null) {
+            if (winner === compChoice) {
+                compWins++;
+            } else {
+                playerWins++;
+            }
+        }
+        let gameCount = i+1;
+        console.log("Good Game! The Score after Game " + gameCount + " is" +
+                    "\n     Player: " + playerWins +
+                    "\n     Computer: " + compWins);
+    }
+}
+
 function computerPlay() {
     // choose random value
     let randInt = Math.floor(Math.random()*3);
@@ -75,31 +102,6 @@ function playRound(compChoice, playerChoice) {
     }
 }
 
-function game() {
-    console.clear();
-    let compWins = 0;
-    let playerWins = 0;
 
-    for(let i=0; i<5; i++){
-        let compChoice = computerPlay();
-        let playerChoice = getPlayerChoice();
-
-        console.log("You chose: " + playerChoice);
-        console.log("Computer chose: " + compChoice);
-
-        let winner = playRound(compChoice, playerChoice);
-        if (winner != null) {
-            if (winner === compChoice) {
-                compWins++;
-            } else {
-                playerWins++;
-            }
-        }
-        let gameCount = i+1;
-        console.log("Good Game! The Score after Game " + gameCount + " is" +
-                    "\n     Player: " + playerWins +
-                    "\n     Computer: " + compWins);
-    }
-}
 
 game();
