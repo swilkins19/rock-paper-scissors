@@ -1,9 +1,19 @@
+function setupButtons() {
+    const btns = document.querySelectorAll('.rps-btn');
+    btns.forEach(btn => addEventListener('click', playerSelects));
+}
+
+function playerSelects(e) {
+    console.log(e);
+    console.log(this);
+}
+
 function game() {
     console.clear();
     let compWins = 0;
     let playerWins = 0;
 
-    for(let i=0; i<5; i++){
+    // for(let i=0; i<5; i++){
         let compChoice = computerPlay();
         let playerChoice = getPlayerChoice();
 
@@ -18,11 +28,11 @@ function game() {
                 playerWins++;
             }
         }
-        let gameCount = i+1;
-        console.log("Good Game! The Score after Game " + gameCount + " is" +
-                    "\n     Player: " + playerWins +
-                    "\n     Computer: " + compWins);
-    }
+        // let gameCount = i+1;
+        // console.log("Good Game! The Score after Game " + gameCount + " is" +
+        //             "\n     Player: " + playerWins +
+        //             "\n     Computer: " + compWins);
+    // }
 }
 
 function computerPlay() {
@@ -103,5 +113,5 @@ function playRound(compChoice, playerChoice) {
 }
 
 
-
-game();
+setupButtons();
+// game();
