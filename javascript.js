@@ -14,34 +14,15 @@ function startRound(playerChoice) {
     appendResults("Player chose: " + playerChoice);
     let compChoice = computerPlay();
     appendResults("Computer chose: " + compChoice);
-    /*let winner = */playRound(compChoice, playerChoice);
-}
-
-function game() {
-    console.clear();
-    let compWins = 0;
-    let playerWins = 0;
-
-    // for(let i=0; i<5; i++){
-        let compChoice = computerPlay();
-        let playerChoice = getPlayerChoice();
-
-        console.log("You chose: " + playerChoice);
-        console.log("Computer chose: " + compChoice);
-
-        let winner = playRound(compChoice, playerChoice);
-        if (winner != null) {
-            if (winner === compChoice) {
-                compWins++;
-            } else {
-                playerWins++;
-            }
+    
+    let winner = playRound(compChoice, playerChoice);
+    if (winner != null) {
+        if (winner === compChoice) {
+            updateScore("comp");
+        } else {
+            updateScore("player");
         }
-        // let gameCount = i+1;
-        // console.log("Good Game! The Score after Game " + gameCount + " is" +
-        //             "\n     Player: " + playerWins +
-        //             "\n     Computer: " + compWins);
-    // }
+    }
 }
 
 function computerPlay() {
@@ -64,26 +45,6 @@ function computerPlay() {
     }
 
     return compChoice;
-}
-
-function getPlayerChoice() {
-    let keepAsking = true;
-    let playerChoice = "";
-    while(keepAsking) {
-        playerChoice = prompt("Rock, Paper, Scissors, Shoot! What do you choose? [Rock, Paper, Scissors]");
-        playerChoice = formatPlayerChoice(playerChoice);
-
-        if(playerChoice !== "Rock"
-            && playerChoice !== "Paper"
-            && playerChoice !== "Scissors") {
-                console.log("You chose: " + playerChoice);
-                console.log("You have not chosen a valid option, please choose one of the following and be careful of spelling:\nRock\nPaper\nScissors");
-        } else {
-            keepAsking = false;
-        }
-    } 
-
-    return playerChoice;
 }
 
 function formatPlayerChoice(playerChoice) {
@@ -128,5 +89,22 @@ function appendResults(text){
     results.appendChild(newResult);
 }
 
+function updateScore(winner){
+    if(winner == "player"){
+        let playerScoreboard = document.querySelector('#playerScore');
+        let playerWins = isNaN(parseInt(playerScoreboard.textContent)) ? 0 : parseInt(playerScoreboard.textContent);
+        playerScoreboard.textContent = ++playerWins;
+        if(playerWins == 5){
+            alert("Player wins");
+        }
+    }else if (winner == "comp"){
+        let compScoreboard = document.querySelector('#compScore');
+        let compWins = isNaN(parseInt(compScoreboard.textContent)) ? 0 : parseInt(compScoreboard.textContent)
+        compScoreboard.textContent = ++compWins;
+        if(compWins == 5){
+            alert("Computer wins");
+        }
+    }
+}
+
 setupButtons();
-// game();
