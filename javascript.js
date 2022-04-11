@@ -11,18 +11,10 @@ function playerSelects() {
 }
 
 function startRound(playerChoice) {
-    console.log("Player chose: " + playerChoice);
+    appendResults("Player chose: " + playerChoice);
     let compChoice = computerPlay();
-    console.log("Computer chose: " + compChoice);
-    let winner = playRound(compChoice, playerChoice);
-
-    if (winner != null) {
-        if (winner === compChoice) {
-            console.log("Computer Wins");
-        } else {
-            console.log("Player Wins");
-        }
-    }
+    appendResults("Computer chose: " + compChoice);
+    /*let winner = */playRound(compChoice, playerChoice);
 }
 
 function game() {
@@ -110,25 +102,31 @@ function formatPlayerChoice(playerChoice) {
 function playRound(compChoice, playerChoice) {
 
     if(compChoice === playerChoice) {
-        console.log("You both chose " + compChoice);
-        console.log("It's a Tie!");
+        appendResults("You both chose " + compChoice);
+        appendResults("It's a Tie!");
         return;
     } 
     else if ((compChoice === "Rock" && playerChoice === "Scissors")
                 || (compChoice == "Paper" && playerChoice === "Rock")
                 || (compChoice == "Scissors" && playerChoice === "Paper")) {
         
-        console.log(compChoice + " beats " + playerChoice)
-        console.log("You Lose :(");
+        appendResults(compChoice + " beats " + playerChoice)
+        appendResults("You Lose :(");
         return compChoice;
     }
     else {
-        console.log(playerChoice + " beats " + compChoice)
-        console.log("You Win!");
+        appendResults(playerChoice + " beats " + compChoice)
+        appendResults("You Win!");
         return playerChoice;
     }
 }
 
+function appendResults(text){
+    let results = document.querySelector('#results');
+    let newResult = document.createElement('p');
+    newResult.textContent = text;
+    results.appendChild(newResult);
+}
 
 setupButtons();
 // game();
