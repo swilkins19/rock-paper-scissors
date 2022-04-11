@@ -1,11 +1,28 @@
 function setupButtons() {
     const btns = document.querySelectorAll('.rps-btn');
-    btns.forEach(btn => addEventListener('click', playerSelects));
+    btns.forEach(btn => btn.addEventListener('click', playerSelects));
 }
 
-function playerSelects(e) {
-    console.log(e);
-    console.log(this);
+function playerSelects() {
+    if(this.id == "rock" || this.id == "paper" || this.id == "scissors") {
+        let playerChoice = formatPlayerChoice(this.id);
+        startRound(playerChoice);
+    }
+}
+
+function startRound(playerChoice) {
+    console.log("Player chose: " + playerChoice);
+    let compChoice = computerPlay();
+    console.log("Computer chose: " + compChoice);
+    let winner = playRound(compChoice, playerChoice);
+
+    if (winner != null) {
+        if (winner === compChoice) {
+            console.log("Computer Wins");
+        } else {
+            console.log("Player Wins");
+        }
+    }
 }
 
 function game() {
